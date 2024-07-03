@@ -7,7 +7,7 @@ import com.fs.starfarer.api.campaign.econ.MarketAPI
 import com.fs.starfarer.api.campaign.rules.MemoryAPI
 import com.fs.starfarer.api.impl.campaign.rulecmd.BaseCommandPlugin
 import com.fs.starfarer.api.util.Misc
-import org.dp.garage.DriftToMarket
+import org.dp.garage.FleetIsParkedScript
 
 class FleetGarage : BaseCommandPlugin() {
     companion object{
@@ -57,7 +57,7 @@ class FleetGarage : BaseCommandPlugin() {
         }else{
             parkFleet()
             getMarket(memoryMap)?.let { m ->
-                Global.getSector().addTransientScript(DriftToMarket(m))
+                Global.getSector().addTransientScript(FleetIsParkedScript(m))
             }
         }
         return true
