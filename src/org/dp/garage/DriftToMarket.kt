@@ -22,7 +22,5 @@ class DriftToMarket(private val market: MarketAPI): EveryFrameScript {
             pf.location.set(marketLoc.location.x, marketLoc.location.y)
         }
         pf.velocity.set(marketLoc.velocity.x, marketLoc.velocity.y)
-
-
     }
 }
