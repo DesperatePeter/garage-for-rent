@@ -24,6 +24,9 @@ class FleetGarage : BaseCommandPlugin() {
         fun getMarket(memoryMap: MutableMap<String, MemoryAPI>?): MarketAPI? = Misc.getPlayerMarkets(false).firstOrNull { it.id == (memoryMap?.get("market")?.get("\$id") as? String) }
         val playerFleet: CampaignFleetAPI
             get() = Global.getSector().playerFleet
+        fun unparkFleet(){
+            FleetGarage().launchFleet()
+        }
     }
     private fun parkFleet(){
         playerFleet.forceSync()
