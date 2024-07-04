@@ -1,6 +1,7 @@
 package org.dp.garage
 
 import com.fs.starfarer.api.BaseModPlugin
+import com.fs.starfarer.api.Global
 
 /**
  * A Kotlin version of ExampleModPlugin.java.
@@ -12,6 +13,6 @@ class GarageForSalePlugin : BaseModPlugin() {
 
     override fun onGameLoad(newGame: Boolean) {
         super.onGameLoad(newGame)
-
+        Global.getSector().registerPlugin(GarageCampaignPlugin())
     }
 }
