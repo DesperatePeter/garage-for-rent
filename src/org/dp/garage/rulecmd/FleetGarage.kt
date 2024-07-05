@@ -67,9 +67,14 @@ class FleetGarage : BaseCommandPlugin() {
         params: MutableList<Misc.Token>?,
         memoryMap: MutableMap<String, MemoryAPI>?
     ): Boolean {
+        dialog?.visualPanel?.showImagePortion("illustrations", "gfs_garage", 256f, 256f, 0f, 0f, 256f, 256f)
         if(isParked()){
+            dialog?.textPanel?.addPara("Here to retrieve your fleet? I anticipated your arrival and took the liberty to already make some preparations.")
+            dialog?.textPanel?.addPara("Just give me a minute....and you're good to go! Take care of yourself out there, wouldn't want to lose my best customer.")
             launchFleet()
         }else{
+            dialog?.textPanel?.addPara("I knew my offer was too good to decline! Oh, no need to sign any paperwork, I already got your signature right here!")
+            dialog?.textPanel?.addPara("In fact, I already took the liberty to store your fleet! No need to thank me, that's my job after all!")
             parkFleet()
             getMarket(memoryMap)?.let { m ->
                 Global.getSector().addTransientScript(FleetIsParkedScript(m))

@@ -1,5 +1,10 @@
 {
      "ruleCommandPackages": [
          "org.dp.garage.rulecmd"
-     ]
+     ],
+  "graphics" : {
+    "illustrations" : {
+      "gfs_garage" : "graphics/garage.jpg"
+    }
+  }
 }
