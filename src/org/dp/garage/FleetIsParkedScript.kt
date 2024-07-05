@@ -26,8 +26,8 @@ class FleetIsParkedScript(private val market: MarketAPI): EveryFrameScript {
         val marketLoc = market.planetEntity
         val dx = pf.location - marketLoc.location
         if(dx.length() > market.planetEntity.radius * 0.1f){
-            pf.location.set(marketLoc.location.x, marketLoc.location.y)
+            pf.setLocation(marketLoc.location.x, marketLoc.location.y)
         }
-        pf.velocity.set(marketLoc.velocity.x, marketLoc.velocity.y)
+        pf.setVelocity(marketLoc.velocity.x, marketLoc.velocity.y)
     }
 }
