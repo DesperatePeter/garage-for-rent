@@ -2,12 +2,24 @@ package org.dp.garage
 
 import com.fs.starfarer.api.EveryFrameScript
 import com.fs.starfarer.api.Global
+import com.fs.starfarer.api.campaign.PlanetAPI
 import com.fs.starfarer.api.campaign.econ.MarketAPI
 import com.fs.starfarer.api.util.IntervalUtil
 import org.dp.garage.rulecmd.FleetGarage
 import org.lazywizard.lazylib.ext.minus
+import org.lwjgl.util.vector.Vector2f
 
 class FleetIsParkedScript(private val market: MarketAPI): EveryFrameScript {
+
+
+    companion object{
+        fun getOrbitalVelocity(planet: PlanetAPI): Vector2f {
+            val orbitCopy = planet.orbit.makeCopy()
+            orbitCopy.advance(1f)
+            orbitCopy.updateLocation()
+            return (orbitCopy.computeCurrentLocation() - planet.orbit.computeCurrentLocation())
+        }
+    }
 
     private val timer = IntervalUtil(1f, 1f)
 
@@ -23,11 +35,12 @@ class FleetIsParkedScript(private val market: MarketAPI): EveryFrameScript {
         }
         val pf = Global.getSector().playerFleet ?: return
         if(pf.containingLocation != market.containingLocation) return
-        val marketLoc = market.planetEntity
-        val dx = pf.location - marketLoc.location
+        val planet = market.planetEntity
+        val dx = pf.location - planet.location
         if(dx.length() > market.planetEntity.radius * 0.1f){
-            pf.setLocation(marketLoc.location.x, marketLoc.location.y)
+            pf.setLocation(planet.location.x, planet.location.y)
         }
-        pf.setVelocity(marketLoc.velocity.x, marketLoc.velocity.y)
+        val v = getOrbitalVelocity(planet)
+        pf.setVelocity(v.x, v.y)
     }
 }
